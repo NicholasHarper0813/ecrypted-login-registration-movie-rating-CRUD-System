@@ -4,9 +4,9 @@ session_start();
 $GLOBALS['config'] = array(
     'mysql' => array(
         'host' => '127.0.0.1',
-        'username' => 'root',
-        'password' => '',
-        'db' => 'movies_database'
+        'username' => 'admin',
+        'password' => '123456',
+        'db' => 'shop_database'
     ),
     'remember-me' => array(
         'cookie_name' => 'hash',
