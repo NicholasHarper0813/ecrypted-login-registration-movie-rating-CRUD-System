@@ -1,22 +1,28 @@
 <?php
-class Movie extends Database{
+class Movie extends Database
+{
     private $_db, $_data;
 
-    public function __construct($movie = null) {
+    public function __construct($movie = null)
+    {
         $this->_db = DB::getInstance();
     }
 
-    public function create($fields = array()) {
-        if(!$this->_db->insert('crud', $fields)) {
+    public function create($fields = array()) 
+    {
+        if(!$this->_db->insert('crud', $fields)) 
+        {
             throw new Exception('There was a problem inserting data to crud table.');
         }
     }
 
-    public function data() {
+    public function data() 
+    {
         return $this->_data;
     }
     
-    public function select() {
+    public function select()
+    {
 
         $sql =  "SELECT * FROM crud";
 
@@ -31,19 +37,22 @@ class Movie extends Database{
 
     }
 
-    public function insert($fields) {
+    public function insert($fields)
+    {
         $implodeColumns = implode(", ",array_keys($fields));
         $implodePlaceholder = implode(", :",array_keys($fields));
 
         $sql = "INSERT INTO crud ($implodeColumns) VALUES (:".$implodePlaceholder.")";
         $statement = $this->connect()->prepare($sql);
-        foreach($fields as $key => $value) {
+        foreach($fields as $key => $value) 
+        {
             $statement->bindValue(':'.$key,$value);
         }
         $statementExec = $statement->execute();
     }
 
-    public function selectOne($id) {
+    public function selectOne($id) 
+    {
         $sql = "SELECT * FROM crud WHERE id = :id";
         $statement =  $this->connect()->prepare($sql);
         $statement->bindValue(":id",$id);
@@ -52,7 +61,8 @@ class Movie extends Database{
         return $result;
     }
     
-    public function destroy($id) {
+    public function destroy($id) 
+    {
         $sql = "DELETE FROM crud WHERE id = :id";
 
         $statement = $this->connect()->prepare($sql);
@@ -60,7 +70,8 @@ class Movie extends Database{
         $statement->execute();
     }
 
-    public function update_movie($id, $title, $duration, $rating) {
+    public function update_movie($id, $title, $duration, $rating)
+    {
         $sql = "UPDATE crud 
                 SET title = :title,
                     duration = :duration,
