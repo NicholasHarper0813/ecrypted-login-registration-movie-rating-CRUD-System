@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 
 $GLOBALS['config'] = array(
     'mysql' => array(
