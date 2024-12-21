@@ -28,8 +28,10 @@ class Movie extends Database
 
         $result = $this->connect()->query($sql);
 
-        if($result->rowCount() > 0) {
-            while ($row = $result->fetch()) {
+        if($result->rowCount() > 0) 
+        {
+            while ($row = $result->fetch())
+            {
                 $data[] = $row;
             }
             return $data;
