@@ -15,7 +15,6 @@ class User
             if(Session::exists($this->_sessionName))
             {
                 $user = Session::get($this->_sessionName);
-                
                 if($this->find($user))
                 {
                     $this->_isLoggedIn = true;
@@ -54,7 +53,6 @@ class User
 
     public function login($email = null, $password = null, $remember = false)
     {
-
         if(!$email && !$password && $this->exists()) 
         {
             Session::put($this->_sessionName, $this->data()->id);
@@ -62,13 +60,11 @@ class User
         else 
         {
             $user = $this->find($email);
-
             if($user) 
             {
                 if($this->data()->Password === Hash::make($password, $this->data()->salt)) 
                 {
                     Session::put($this->_sessionName, $this->data()->id);
-
                     if($remember)
                     {
                         $hash = Hash::unique();
@@ -85,9 +81,7 @@ class User
                         {
                             $hash = $hashCheck->first()->hash;
                         }
-
                         Cookie::put($this->_cookieName, $hash, Config::get('remember-me/cookie_expiry'));
-
                     }
                     return true;   
                 }
