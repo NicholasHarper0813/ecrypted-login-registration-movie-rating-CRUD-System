@@ -20,10 +20,6 @@ class User
                 {
                     $this->_isLoggedIn = true;
                 }
-                else 
-                {
-                    // process logout
-                }
             }
         }
         else 
@@ -107,13 +103,9 @@ class User
 
     public function logout() 
     {
-
         $this->_db->delete('users_session', array('user_id', '=', $this->data()->id));
-
         Session::delete($this->_sessionName);
         Cookie::delete($this->_cookieName);
-
-
     }
 
     public function data() 
